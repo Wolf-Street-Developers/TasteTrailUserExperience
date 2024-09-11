@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{812D3BEF-93E4-4747-8A5E-8FFDF870E6B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "test\UnitTests\UnitTests.csproj", "{670D2918-2289-48FB-B9F6-C138D84CAB7C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7C1F7878-A10F-44DD-8181-D79825001510}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TasteTrailUserExperience.Api", "src\TasteTrailUserExperience.Api\TasteTrailUserExperience.Api.csproj", "{9C85DD8A-C503-479F-9F91-962D2DF4E2C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TasteTrailUserExperience.Core", "src\TasteTrailUserExperience.Core\TasteTrailUserExperience.Core.csproj", "{67262A6E-E660-4688-A7B1-1FF166A07DD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TasteTrailUserExperience.Infrastructure", "src\TasteTrailUserExperience.Infrastructure\TasteTrailUserExperience.Infrastructure.csproj", "{42C55DAC-46EB-4631-91D2-8A84C225DFE5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{670D2918-2289-48FB-B9F6-C138D84CAB7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{670D2918-2289-48FB-B9F6-C138D84CAB7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{670D2918-2289-48FB-B9F6-C138D84CAB7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{670D2918-2289-48FB-B9F6-C138D84CAB7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C85DD8A-C503-479F-9F91-962D2DF4E2C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C85DD8A-C503-479F-9F91-962D2DF4E2C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C85DD8A-C503-479F-9F91-962D2DF4E2C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C85DD8A-C503-479F-9F91-962D2DF4E2C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67262A6E-E660-4688-A7B1-1FF166A07DD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67262A6E-E660-4688-A7B1-1FF166A07DD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67262A6E-E660-4688-A7B1-1FF166A07DD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67262A6E-E660-4688-A7B1-1FF166A07DD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42C55DAC-46EB-4631-91D2-8A84C225DFE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42C55DAC-46EB-4631-91D2-8A84C225DFE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42C55DAC-46EB-4631-91D2-8A84C225DFE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42C55DAC-46EB-4631-91D2-8A84C225DFE5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{670D2918-2289-48FB-B9F6-C138D84CAB7C} = {812D3BEF-93E4-4747-8A5E-8FFDF870E6B0}
+		{9C85DD8A-C503-479F-9F91-962D2DF4E2C6} = {7C1F7878-A10F-44DD-8181-D79825001510}
+		{67262A6E-E660-4688-A7B1-1FF166A07DD0} = {7C1F7878-A10F-44DD-8181-D79825001510}
+		{42C55DAC-46EB-4631-91D2-8A84C225DFE5} = {7C1F7878-A10F-44DD-8181-D79825001510}
+	EndGlobalSection
+EndGlobal
