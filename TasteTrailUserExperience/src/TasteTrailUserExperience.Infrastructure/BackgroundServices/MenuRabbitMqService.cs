@@ -22,8 +22,6 @@ public class MenuRabbitMqService : BaseRabbitMqService, IHostedService
         base.StartListening("menu_create", async message => {
             using (var scope = base.serviceScopeFactory.CreateScope())
             {
-                System.Console.WriteLine("CREATE");
-                System.Console.WriteLine(message);
                 var menuRepository = scope.ServiceProvider.GetRequiredService<IMenuRepository>();
 
                 var newMenu = JsonSerializer.Deserialize<Menu>(message)!;
@@ -34,8 +32,6 @@ public class MenuRabbitMqService : BaseRabbitMqService, IHostedService
         base.StartListening("menu_put", async message => {
             using (var scope = base.serviceScopeFactory.CreateScope())
             {
-                System.Console.WriteLine("UPDATE");
-                System.Console.WriteLine(message);
                 var menuRepository = scope.ServiceProvider.GetRequiredService<IMenuRepository>();
 
                 var updatedMenu = JsonSerializer.Deserialize<Menu>(message)!;
@@ -44,8 +40,6 @@ public class MenuRabbitMqService : BaseRabbitMqService, IHostedService
         });
 
         base.StartListening("menu_delete", async message => {
-            System.Console.WriteLine("DELETE");
-            System.Console.WriteLine(message);
             using (var scope = base.serviceScopeFactory.CreateScope())
             {
                 var menuRepository = scope.ServiceProvider.GetRequiredService<IMenuRepository>();
@@ -56,8 +50,6 @@ public class MenuRabbitMqService : BaseRabbitMqService, IHostedService
         });
 
         base.StartListening("menu_set_image", async message => {
-            System.Console.WriteLine("SET IMAGE");
-            System.Console.WriteLine(message);
             using (var scope = base.serviceScopeFactory.CreateScope())
             {
                 var menuRepository = scope.ServiceProvider.GetRequiredService<IMenuRepository>();
@@ -71,8 +63,6 @@ public class MenuRabbitMqService : BaseRabbitMqService, IHostedService
         });
 
         base.StartListening("menu_delete_image", async message => {
-            System.Console.WriteLine("DELETE IMAGE");
-            System.Console.WriteLine(message);
             using (var scope = base.serviceScopeFactory.CreateScope())
             {
                 var menuRepository = scope.ServiceProvider.GetRequiredService<IMenuRepository>();

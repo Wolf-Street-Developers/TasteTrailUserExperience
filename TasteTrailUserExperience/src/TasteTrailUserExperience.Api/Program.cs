@@ -28,6 +28,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddHostedService<VenueRabbitMqService>();
 builder.Services.AddHostedService<MenuRabbitMqService>();
+builder.Services.AddHostedService<MenuItemRabbitMqService>();
 
 var app = builder.Build();
 

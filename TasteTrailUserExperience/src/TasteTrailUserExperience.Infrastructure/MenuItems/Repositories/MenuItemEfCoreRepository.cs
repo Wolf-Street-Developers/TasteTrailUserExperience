@@ -109,6 +109,18 @@ public class MenuItemEfCoreRepository : IMenuItemRepository
         return menuItem.Id;
     }
 
+    public async Task<int?> DeleteByIdAsync(int id)
+    {
+        var menuItem = await _dbContext.MenuItems.FindAsync(id);
+
+        if (menuItem is null)
+            return null;
+        
+        _dbContext.MenuItems.Remove(menuItem);
+        await _dbContext.SaveChangesAsync();
+
+        return id;
+    }
 
     public async Task<int?> PutAsync(MenuItem menuItem)
     {
