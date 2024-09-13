@@ -1,44 +1,47 @@
+using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using TasteTrailData.Api.Common.Extensions.ServiceCollection;
+using TasteTrailUserExperience.Api.Common.Extensions.ServiceCollection;
+using TasteTrailUserExperience.Api.Common.Utilities;
+using TasteTrailUserExperience.Core.Common.Options;
+using TasteTrailUserExperience.Infrastructure.BackgroundServices;
+using TasteTrailUserExperience.Infrastructure.Common.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+SetupEnvironmentVariables.SetupEnvironmentVariablesMethod(builder.Configuration, builder.Environment.IsDevelopment());
+
+builder.Services.InitDbContext(builder.Configuration);
+builder.Services.InitAuth(builder.Configuration);
+builder.Services.InitSwagger();
+builder.Services.InitCors();
+
+builder.Services.RegisterDependencyInjection();
+
+var rabbitMqSection = builder.Configuration.GetSection("RabbitMq");
+
+builder.Services.Configure<RabbitMqOptions>(rabbitMqSection);
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+
+builder.Services.AddHostedService<VenueRabbitMqService>();
+builder.Services.AddHostedService<MenuRabbitMqService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var services = scope.ServiceProvider;
+    var dbContext = services.GetRequiredService<UserExperienceDbContext>();
+
+    await dbContext.Database.MigrateAsync();
 }
 
-app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+app.MapControllers();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
