@@ -24,7 +24,7 @@ jobs:
         run: dotnet build TasteTrailUserExperience/src/TasteTrailUserExperience.Api/TasteTrailUserExperience.Api.csproj --no-restore --configuration Release
 
       - name: Run Unit Tests
-        run: dotnet test TasteTrailUserExperience/test/UnitTests/UnitTests.csproj --no-build
+        run: dotnet test TasteTrailUserExperience/test/UnitTests/UnitTests.csproj
 
   deploy:
     name: Build and Push Docker image
