@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using TasteTrailUserExperience.Core.Common.Options;
+using TasteTrailUserExperience.Core.Feedbacks.Repositories;
 using TasteTrailUserExperience.Core.Users.Models;
 using TasteTrailUserExperience.Core.Users.Repositories;
 using TasteTrailUserExperience.Infrastructure.BackgroundServices.Base;
@@ -25,6 +26,7 @@ public class UserRabbitMqService : BaseRabbitMqService, IHostedService
                 System.Console.WriteLine(message);
 
                 var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+                var feedbackRepositroy = scope.ServiceProvider.GetRequiredService<IFeedbackRepository>();
 
                 var updatedUser = JsonSerializer.Deserialize<User>(message)!;
                 await userRepository.PutAsync(updatedUser);

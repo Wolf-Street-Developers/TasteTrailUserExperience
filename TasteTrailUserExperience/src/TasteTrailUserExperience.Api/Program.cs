@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using TasteTrailData.Api.Common.Extensions.ServiceCollection;
 using TasteTrailUserExperience.Api.Common.Extensions.ServiceCollection;
