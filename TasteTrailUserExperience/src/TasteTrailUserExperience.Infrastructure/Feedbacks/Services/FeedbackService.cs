@@ -7,6 +7,7 @@ using TasteTrailUserExperience.Core.Feedbacks.Dtos;
 using TasteTrailUserExperience.Core.Feedbacks.Models;
 using TasteTrailUserExperience.Core.Feedbacks.Repositories;
 using TasteTrailUserExperience.Core.Feedbacks.Services;
+using TasteTrailUserExperience.Core.Users.Dtos;
 using TasteTrailUserExperience.Core.Users.Models;
 using TasteTrailUserExperience.Core.Users.Repositories;
 using TasteTrailUserExperience.Core.Venues.Repositories;
@@ -191,12 +192,14 @@ public class FeedbackService : IFeedbackService
         };
 
         var feedbackId = await _feedbackRepository.CreateAsync(newFeedback);
+        await _userRepository.CreateAsync(user);
+
         await UpdateVenueRatingAsync(newFeedback.VenueId);
         
         return feedbackId;
     }
 
-    public async Task<int?> DeleteFeedbackByIdAsync(int id, User user)
+    public async Task<int?> DeleteFeedbackByIdAsync(int id, UserDto user)
     {
         if (id <= 0)
             throw new ArgumentException($"Invalid ID value: {id}.");
@@ -216,7 +219,7 @@ public class FeedbackService : IFeedbackService
         return feedbackId;
     }
 
-    public async Task<int?> PutFeedbackAsync(FeedbackUpdateDto feedback, User user)
+    public async Task<int?> PutFeedbackAsync(FeedbackUpdateDto feedback, UserDto user)
     {
         var feedbackToUpdate = await _feedbackRepository.GetAsNoTrackingAsync(feedback.Id);
 

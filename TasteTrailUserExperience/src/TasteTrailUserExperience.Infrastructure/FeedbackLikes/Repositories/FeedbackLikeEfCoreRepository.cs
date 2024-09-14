@@ -60,4 +60,10 @@ public class FeedbackLikeEfCoreRepository : IFeedbackLikeRepository
         return await _dbContext.FeedbackLikes
                              .AnyAsync(fl => fl.UserId == userId && fl.FeedbackId == feedbackId);
     }
+
+    public async Task<FeedbackLike?> GetByFeedbackAndUserId(int feedbackId, string userId)
+    {
+        return  await _dbContext.FeedbackLikes
+                    .FirstOrDefaultAsync(fl => fl.UserId == userId && fl.FeedbackId == feedbackId);
+    }
 }

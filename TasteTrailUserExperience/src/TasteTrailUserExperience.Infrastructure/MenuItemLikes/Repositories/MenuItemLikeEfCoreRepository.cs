@@ -60,4 +60,10 @@ public class MenuItemLikeEfCoreRepository : IMenuItemLikeRepository
         return await _dbContext.MenuItemLikes
                              .AnyAsync(ml => ml.UserId == userId && ml.MenuItemId == menuItemId);
     }
+
+    public async Task<MenuItemLike?> GetByMenuItemAndUserId(int menuItemId, string userId)
+    {
+        return  await _dbContext.MenuItemLikes
+                    .FirstOrDefaultAsync(ml => ml.UserId == userId && ml.MenuItemId == menuItemId);
+    }
 }

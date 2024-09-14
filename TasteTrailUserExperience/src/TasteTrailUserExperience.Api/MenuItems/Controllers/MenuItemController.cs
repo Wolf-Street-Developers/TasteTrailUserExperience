@@ -36,7 +36,6 @@ public class MenuItemController : ControllerBase
                 user =  new User() 
                 {
                     Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
-                    Role = User.FindFirst(ClaimTypes.Role)!.Value,
                     Username = User.FindFirst(ClaimTypes.Name)!.Value
                 };
             }
@@ -67,7 +66,6 @@ public class MenuItemController : ControllerBase
                 user =  new User() 
                 {
                     Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
-                    Role = User.FindFirst(ClaimTypes.Role)!.Value,
                     Username = User.FindFirst(ClaimTypes.Name)!.Value
                 };
             }

@@ -8,4 +8,6 @@ public interface IMenuItemLikeRepository : ICreateAsync<MenuItemLike, int>, IDel
     Task<List<int>> GetLikedMenuItemIds(string userId);
 
     Task<bool> Exists(int menuItemId, string userId);
+
+    Task<MenuItemLike?> GetByMenuItemAndUserId(int menuItemId, string userId);
 }

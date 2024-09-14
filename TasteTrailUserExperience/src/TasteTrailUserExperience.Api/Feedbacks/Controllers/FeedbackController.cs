@@ -6,6 +6,7 @@ using TasteTrailData.Infrastructure.Filters.Dtos;
 using TasteTrailUserExperience.Core.Common.Exceptions;
 using TasteTrailUserExperience.Core.Feedbacks.Dtos;
 using TasteTrailUserExperience.Core.Feedbacks.Services;
+using TasteTrailUserExperience.Core.Users.Dtos;
 using TasteTrailUserExperience.Core.Users.Models;
 
 namespace TasteTrailUserExperience.Api.Feedbacks.Controllers;
@@ -37,7 +38,6 @@ public class FeedbackController : ControllerBase
                 user =  new User() 
                 {
                     Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
-                    Role = User.FindFirst(ClaimTypes.Role)!.Value,
                     Username = User.FindFirst(ClaimTypes.Name)!.Value
                 };
             }
@@ -68,7 +68,6 @@ public class FeedbackController : ControllerBase
                 user =  new User() 
                 {
                     Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
-                    Role = User.FindFirst(ClaimTypes.Role)!.Value,
                     Username = User.FindFirst(ClaimTypes.Name)!.Value
                 };
             }
@@ -124,7 +123,6 @@ public class FeedbackController : ControllerBase
         {
             var user =  new User() {
                 Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
-                Role = User.FindFirst(ClaimTypes.Role)!.Value,
                 Username = User.FindFirst(ClaimTypes.Name)!.Value
             };
 
@@ -148,7 +146,7 @@ public class FeedbackController : ControllerBase
     {
         try
         {
-            var user =  new User() {
+            var user =  new UserDto() {
                 Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
                 Role = User.FindFirst(ClaimTypes.Role)!.Value,
                 Username = User.FindFirst(ClaimTypes.Name)!.Value
@@ -177,7 +175,7 @@ public class FeedbackController : ControllerBase
     {
         try
         {
-            var user =  new User() {
+            var user =  new UserDto() {
                 Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
                 Role = User.FindFirst(ClaimTypes.Role)!.Value,
                 Username = User.FindFirst(ClaimTypes.Name)!.Value

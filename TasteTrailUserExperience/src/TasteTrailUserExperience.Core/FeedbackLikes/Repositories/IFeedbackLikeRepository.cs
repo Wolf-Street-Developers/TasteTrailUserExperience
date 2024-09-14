@@ -8,4 +8,6 @@ public interface IFeedbackLikeRepository : ICreateAsync<FeedbackLike, int>, IDel
     Task<List<int>> GetLikedFeedbacksIds(string userId);
 
     Task<bool> Exists(int feedbackId, string userId);
+
+    Task<FeedbackLike?> GetByFeedbackAndUserId(int feedbackId, string userId);
 }

@@ -2,11 +2,9 @@ using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using TasteTrailData.Core.Menus.Models;
 using TasteTrailUserExperience.Core.Common.Options;
 using TasteTrailUserExperience.Core.MenuItems.Models;
 using TasteTrailUserExperience.Core.MenuItems.Repositories;
-using TasteTrailUserExperience.Core.Menus.Repositories;
 using TasteTrailUserExperience.Infrastructure.BackgroundServices.Base;
 using TasteTrailUserExperience.Infrastructure.BackgroundServices.Dtos;
 

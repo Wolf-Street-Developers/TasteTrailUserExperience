@@ -1,6 +1,5 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TasteTrailData.Api.Common.Extensions.Controllers;
 using TasteTrailUserExperience.Core.Common.Exceptions;
@@ -16,7 +15,7 @@ public class MenuItemLikeController : ControllerBase
 {
     private readonly IMenuItemLikeService _menuItemLikeService;
 
-    public MenuItemLikeController(IMenuItemLikeService menuItemLikeService, UserManager<User> userManager)
+    public MenuItemLikeController(IMenuItemLikeService menuItemLikeService)
     {
         _menuItemLikeService = menuItemLikeService;
     }
@@ -29,7 +28,6 @@ public class MenuItemLikeController : ControllerBase
         {
             var user =  new User() {
                 Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
-                Role = User.FindFirst(ClaimTypes.Role)!.Value,
                 Username = User.FindFirst(ClaimTypes.Name)!.Value
             };
             
@@ -53,17 +51,16 @@ public class MenuItemLikeController : ControllerBase
 
     [HttpDelete("{id}")]
     [Authorize]
-    public async Task<IActionResult> DeleteByIdAsync(int id)
+    public async Task<IActionResult> DeleteByMenuItemIdAsync(int menuItemId)
     {
         try
         {
             var user =  new User() {
                 Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
-                Role = User.FindFirst(ClaimTypes.Role)!.Value,
                 Username = User.FindFirst(ClaimTypes.Name)!.Value
             };
 
-            var menuItemLikeId = await _menuItemLikeService.DeleteMenuItemLikeByIdAsync(id, user);
+            var menuItemLikeId = await _menuItemLikeService.DeleteMenuItemLikeByIdAsync(menuItemId, user);
 
             if (menuItemLikeId is null)
                 return NotFound(menuItemLikeId);

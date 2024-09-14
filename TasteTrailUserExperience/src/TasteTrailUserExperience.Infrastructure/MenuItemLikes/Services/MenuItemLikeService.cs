@@ -52,12 +52,12 @@ public class MenuItemLikeService : IMenuItemLikeService
         return id;
     }
 
-    public async Task<int?> DeleteMenuItemLikeByIdAsync(int id, User user)
+    public async Task<int?> DeleteMenuItemLikeByIdAsync(int menuItemId, User user)
     {
-        if (id <= 0)
-            throw new ArgumentException($"Invalid ID value: {id}.");
+        if (menuItemId <= 0)
+            throw new ArgumentException($"Invalid ID value: {menuItemId}.");
 
-        var menuItemLikeToDelete = await _menuItemLikeRepository.GetAsNoTrackingAsync(id);
+        var menuItemLikeToDelete = await _menuItemLikeRepository.GetByMenuItemAndUserId(menuItemId, user.Id);
 
         if (menuItemLikeToDelete is null)
             return null;
@@ -65,9 +65,8 @@ public class MenuItemLikeService : IMenuItemLikeService
         if (menuItemLikeToDelete.UserId != user.Id)
             throw new ForbiddenAccessException();
 
-        var menuItemLikeId = await _menuItemLikeRepository.DeleteByIdAsync(id);
-        
-        var menuItemId = await _menuItemRepository.DecrementLikesAsync(new MenuItem()
+        var menuItemLikeId = await _menuItemLikeRepository.DeleteByIdAsync(menuItemLikeToDelete.Id);
+        var menuItemIdToDecrementLikes = await _menuItemRepository.DecrementLikesAsync(new MenuItem()
         {
             Name = "",
             MenuId = 0,
@@ -75,7 +74,7 @@ public class MenuItemLikeService : IMenuItemLikeService
             UserId = user.Id,
         });
 
-        if(menuItemId is null)
+        if(menuItemIdToDecrementLikes is null)
         {
             await _menuItemLikeRepository.CreateAsync(new MenuItemLike()
             {

@@ -50,28 +50,25 @@ public class FeedbackLikeService : IFeedbackLikeService
         return id;
     }
 
-    public async Task<int?> DeleteFeedbackLikeByIdAsync(int id, User user)
+    public async Task<int?> DeleteFeedbackLikeByIdAsync(int feedbackId, User user)
     {
-        if (id <= 0)
-            throw new ArgumentException($"Invalid ID value: {id}.");
+        if (feedbackId <= 0)
+            throw new ArgumentException($"Invalid ID value: {feedbackId}.");
 
-        var feedbackLikeToDelete = await _feedbackLikeRepository.GetAsNoTrackingAsync(id);
+        var feedbackLikeToDelete = await _feedbackLikeRepository.GetByFeedbackAndUserId(feedbackId, user.Id);
 
         if (feedbackLikeToDelete is null)
             return null;
 
-        if (feedbackLikeToDelete.UserId != user.Id)
-            throw new ForbiddenAccessException();
-
-        var feedbackLikeId = await _feedbackLikeRepository.DeleteByIdAsync(id);
+        var feedbackLikeId = await _feedbackLikeRepository.DeleteByIdAsync(feedbackLikeToDelete.Id);
         
-        var feedbackId = await _feedbackRepository.DecrementLikesAsync(new Feedback()
+        var feedbackToDecrementId = await _feedbackRepository.DecrementLikesAsync(new Feedback()
         {
             Id = feedbackLikeToDelete.FeedbackId,
             UserId = user.Id,
         });
 
-        if(feedbackId is null)
+        if(feedbackToDecrementId is null)
         {
             await _feedbackLikeRepository.CreateAsync(new FeedbackLike()
             {

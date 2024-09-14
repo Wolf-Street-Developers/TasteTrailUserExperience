@@ -1,5 +1,6 @@
 using TasteTrailData.Infrastructure.Filters.Dtos;
 using TasteTrailUserExperience.Core.Feedbacks.Dtos;
+using TasteTrailUserExperience.Core.Users.Dtos;
 using TasteTrailUserExperience.Core.Users.Models;
 
 namespace TasteTrailUserExperience.Core.Feedbacks.Services;
@@ -16,7 +17,7 @@ public interface IFeedbackService
 
     Task<int> CreateFeedbackAsync(FeedbackCreateDto feedback, User user);
 
-    Task<int?> DeleteFeedbackByIdAsync(int id, User user);
+    Task<int?> DeleteFeedbackByIdAsync(int id, UserDto user);
 
-    Task<int?> PutFeedbackAsync(FeedbackUpdateDto feedback, User user);
+    Task<int?> PutFeedbackAsync(FeedbackUpdateDto feedback, UserDto user);
 }

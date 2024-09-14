@@ -28,7 +28,6 @@ public class FeedbackLikeController : ControllerBase
         {
             var user =  new User() {
                 Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
-                Role = User.FindFirst(ClaimTypes.Role)!.Value,
                 Username = User.FindFirst(ClaimTypes.Name)!.Value
             };
             
@@ -52,17 +51,16 @@ public class FeedbackLikeController : ControllerBase
 
     [HttpDelete("{id}")]
     [Authorize]
-    public async Task<IActionResult> DeleteByIdAsync(int id)
+    public async Task<IActionResult> DeleteByFeedbackIdAsync(int feedbackId)
     {
         try
         {
             var user =  new User() {
                 Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value,
-                Role = User.FindFirst(ClaimTypes.Role)!.Value,
                 Username = User.FindFirst(ClaimTypes.Name)!.Value
             };
 
-            var feedbackLikeId = await _feedbackLikeService.DeleteFeedbackLikeByIdAsync(id, user);
+            var feedbackLikeId = await _feedbackLikeService.DeleteFeedbackLikeByIdAsync(feedbackId, user);
 
             if (feedbackLikeId is null)
                 return NotFound(feedbackLikeId);
