@@ -18,13 +18,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore Dependencies
-        run: dotnet restore src/TasteTrailUserExperience.Api/TasteTrailUserExperience.Api.csproj
+        run: dotnet restore TasteTrailUserExperience/src/TasteTrailUserExperience.Api/TasteTrailUserExperience.Api.csproj
 
       - name: Build Project
-        run: dotnet build src/TasteTrailUserExperience.Api/TasteTrailUserExperience.Api.csproj --no-restore --configuration Release
+        run: dotnet build TasteTrailUserExperience/src/TasteTrailUserExperience.Api/TasteTrailUserExperience.Api.csproj --no-restore --configuration Release
 
       - name: Run Unit Tests
-        run: dotnet test test/UnitTests/UnitTests.csproj --no-build
+        run: dotnet test TasteTrailUserExperience/test/UnitTests/UnitTests.csproj --no-build
 
   deploy:
     name: Build and Push Docker image
