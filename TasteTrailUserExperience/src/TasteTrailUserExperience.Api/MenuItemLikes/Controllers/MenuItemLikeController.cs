@@ -49,7 +49,7 @@ public class MenuItemLikeController : ControllerBase
         }
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{menuItemId}")]
     [Authorize]
     public async Task<IActionResult> DeleteByMenuItemIdAsync(int menuItemId)
     {
