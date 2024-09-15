@@ -49,9 +49,9 @@ public class MenuItemLikeController : ControllerBase
         }
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     [Authorize]
-    public async Task<IActionResult> DeleteByMenuItemIdAsync(int menuItemId)
+    public async Task<IActionResult> DeleteByMenuItemIdAsync(int id)
     {
         try
         {
@@ -60,7 +60,7 @@ public class MenuItemLikeController : ControllerBase
                 Username = User.FindFirst(ClaimTypes.Name)!.Value
             };
 
-            var menuItemLikeId = await _menuItemLikeService.DeleteMenuItemLikeByIdAsync(menuItemId, user);
+            var menuItemLikeId = await _menuItemLikeService.DeleteMenuItemLikeByIdAsync(id, user);
 
             if (menuItemLikeId is null)
                 return NotFound(menuItemLikeId);

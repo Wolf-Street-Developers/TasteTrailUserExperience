@@ -22,7 +22,7 @@ public class FeedbackController : ControllerBase
         _feedbackService = feedbackService;
     }
 
-    [HttpPost]
+    [HttpPost("{venueId}")]
     public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersDto filterParameters, int venueId)
     {
         try
@@ -82,7 +82,7 @@ public class FeedbackController : ControllerBase
         }
     }
 
-    [HttpGet]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync(int id)
     {
         try
@@ -140,7 +140,7 @@ public class FeedbackController : ControllerBase
         }
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     [Authorize]
     public async Task<IActionResult> DeleteByIdAsync(int id)
     {
