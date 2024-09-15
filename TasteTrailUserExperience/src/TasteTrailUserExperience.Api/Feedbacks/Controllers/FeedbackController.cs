@@ -22,10 +22,10 @@ public class FeedbackController : ControllerBase
         _feedbackService = feedbackService;
     }
 
-    [HttpPost("{venueId}")]
-    public async Task<IActionResult> GetFilteredAsync(FilterParametersDto filterParameters, int venueId)
+    [HttpPost]
+    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersDto filterParameters, int venueId)
     {
-        try 
+        try
         {
             var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var role = User.FindFirst(ClaimTypes.Role)?.Value;
@@ -52,8 +52,8 @@ public class FeedbackController : ControllerBase
         }
     }
 
-    [HttpPost()]
-    public async Task<IActionResult> GetFilteredAsync(FilterParametersSearchDto filterParameters)
+    [HttpPost]
+    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersSearchDto filterParameters)
     {
         try 
         {

@@ -16,8 +16,8 @@ public class MenuController : ControllerBase
         _menuService = menuService;
     }
 
-    [HttpPost("{venueId}")]
-    public async Task<IActionResult> GetFilteredAsync(PaginationParametersDto paginationParameters, int venueId)
+    [HttpPost]
+    public async Task<IActionResult> GetFilteredAsync([FromBody] PaginationParametersDto paginationParameters, int venueId)
     {
         try 
         {
