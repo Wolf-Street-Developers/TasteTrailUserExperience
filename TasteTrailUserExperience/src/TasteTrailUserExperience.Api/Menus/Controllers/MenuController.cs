@@ -46,7 +46,7 @@ public class MenuController : ControllerBase
         }
     }
 
-    [HttpGet("{id}")]
+    [HttpGet]
     public async Task<IActionResult> GetByIdAsync(int id)
     {
         try

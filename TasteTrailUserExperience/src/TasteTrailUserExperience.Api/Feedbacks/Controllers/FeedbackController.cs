@@ -82,7 +82,7 @@ public class FeedbackController : ControllerBase
         }
     }
 
-    [HttpGet("{id}")]
+    [HttpGet]
     public async Task<IActionResult> GetByIdAsync(int id)
     {
         try
@@ -140,7 +140,7 @@ public class FeedbackController : ControllerBase
         }
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete]
     [Authorize]
     public async Task<IActionResult> DeleteByIdAsync(int id)
     {

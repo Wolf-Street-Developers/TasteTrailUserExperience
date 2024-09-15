@@ -31,7 +31,7 @@ public class VenueController : Controller
         }
     }
 
-    [HttpGet("{id}")]
+    [HttpGet]
     public async Task<IActionResult> GetByIdAsync(int id)
     {
         try

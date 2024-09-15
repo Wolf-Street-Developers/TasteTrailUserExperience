@@ -49,7 +49,7 @@ public class FeedbackLikeController : ControllerBase
         }
     }
 
-    [HttpDelete("{feedbackId}")]
+    [HttpDelete]
     [Authorize]
     public async Task<IActionResult> DeleteByFeedbackIdAsync(int feedbackId)
     {
