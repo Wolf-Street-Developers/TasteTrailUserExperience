@@ -18,8 +18,8 @@ public class MenuItemController : ControllerBase
         _menuItemService = menuItemService;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersSearchDto filterParameters, [FromQuery] int menuId)
+    [HttpPost("{menuId}")]
+    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersSearchDto filterParameters, int menuId)
     {
         try 
         {

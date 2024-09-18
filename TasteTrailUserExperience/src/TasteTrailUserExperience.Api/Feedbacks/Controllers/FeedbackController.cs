@@ -22,8 +22,8 @@ public class FeedbackController : ControllerBase
         _feedbackService = feedbackService;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersDto filterParameters, [FromQuery] int venueId)
+    [HttpPost("{venueId}")]
+    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersDto filterParameters, int venueId)
     {
         try
         {
