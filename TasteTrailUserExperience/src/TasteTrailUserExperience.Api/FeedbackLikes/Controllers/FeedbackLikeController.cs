@@ -22,7 +22,7 @@ public class FeedbackLikeController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> CreateAsync([FromForm] FeedbackLikeCreateDto feedbackLike)
+    public async Task<IActionResult> CreateAsync([FromBody] FeedbackLikeCreateDto feedbackLike)
     {
         try
         {
@@ -49,9 +49,9 @@ public class FeedbackLikeController : ControllerBase
         }
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete]
     [Authorize]
-    public async Task<IActionResult> DeleteByFeedbackIdAsync(int id)
+    public async Task<IActionResult> DeleteByFeedbackIdAsync([FromQuery] int feedbackId)
     {
         try
         {
@@ -60,7 +60,7 @@ public class FeedbackLikeController : ControllerBase
                 Username = User.FindFirst(ClaimTypes.Name)!.Value
             };
 
-            var feedbackLikeId = await _feedbackLikeService.DeleteFeedbackLikeByIdAsync(id, user);
+            var feedbackLikeId = await _feedbackLikeService.DeleteFeedbackLikeByIdAsync(feedbackId, user);
 
             if (feedbackLikeId is null)
                 return NotFound(feedbackLikeId);

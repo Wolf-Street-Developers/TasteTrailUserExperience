@@ -22,8 +22,8 @@ public class FeedbackController : ControllerBase
         _feedbackService = feedbackService;
     }
 
-    [HttpPost("{venueId}")]
-    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersDto filterParameters, int venueId)
+    [HttpPost]
+    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersDto filterParameters, [FromQuery] int venueId)
     {
         try
         {
@@ -82,15 +82,15 @@ public class FeedbackController : ControllerBase
         }
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetByIdAsync(int id)
+    [HttpGet]
+    public async Task<IActionResult> GetByIdAsync([FromQuery] int feedbackId)
     {
         try
         {
-            var feedback = await _feedbackService.GetFeedbackByIdAsync(id);
+            var feedback = await _feedbackService.GetFeedbackByIdAsync(feedbackId);
 
             if (feedback is null)
-                return NotFound(id);
+                return NotFound(feedbackId);
 
             return Ok(feedback);
         }
@@ -140,9 +140,9 @@ public class FeedbackController : ControllerBase
         }
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete]
     [Authorize]
-    public async Task<IActionResult> DeleteByIdAsync(int id)
+    public async Task<IActionResult> DeleteByIdAsync([FromQuery] int venueId)
     {
         try
         {
@@ -152,7 +152,7 @@ public class FeedbackController : ControllerBase
                 Username = User.FindFirst(ClaimTypes.Name)!.Value
             };
 
-            var feedbackId = await _feedbackService.DeleteFeedbackByIdAsync(id, user);
+            var feedbackId = await _feedbackService.DeleteFeedbackByIdAsync(venueId, user);
 
             if (feedbackId is null)
                 return NotFound(feedbackId);

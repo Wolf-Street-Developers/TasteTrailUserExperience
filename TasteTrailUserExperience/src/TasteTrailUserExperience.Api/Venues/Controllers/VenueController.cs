@@ -17,7 +17,7 @@ public class VenueController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> GetFilteredAsync(FilterParametersSearchDto filterParameters)
+    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersSearchDto filterParameters)
     {
         try 
         {
@@ -32,14 +32,14 @@ public class VenueController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetByIdAsync(int id)
+    public async Task<IActionResult> GetByIdAsync([FromQuery] int venueId)
     {
         try
         {
-             var venue = await _venueService.GetVenueByIdAsync(id);
+             var venue = await _venueService.GetVenueByIdAsync(venueId);
 
             if (venue is null)
-                return NotFound(id);
+                return NotFound(venueId);
 
             return Ok(venue);
         }

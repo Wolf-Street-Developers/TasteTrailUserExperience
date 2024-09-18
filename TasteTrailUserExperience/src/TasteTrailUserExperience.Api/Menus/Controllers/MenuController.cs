@@ -16,8 +16,8 @@ public class MenuController : ControllerBase
         _menuService = menuService;
     }
 
-    [HttpPost("{venueId}")]
-    public async Task<IActionResult> GetFilteredAsync([FromBody] PaginationParametersDto paginationParameters, int venueId)
+    [HttpPost]
+    public async Task<IActionResult> GetFilteredAsync([FromBody] PaginationParametersDto paginationParameters, [FromQuery] int venueId)
     {
         try 
         {
@@ -32,7 +32,7 @@ public class MenuController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> GetFilteredAsync(PaginationSearchParametersDto paginationSearchParameters)
+    public async Task<IActionResult> GetFilteredAsync([FromBody] PaginationSearchParametersDto paginationSearchParameters)
     {
         try 
         {
@@ -47,14 +47,14 @@ public class MenuController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetByIdAsync(int id)
+    public async Task<IActionResult> GetByIdAsync([FromQuery] int venueId)
     {
         try
         {
-            var menu = await _menuService.GetMenuByIdAsync(id);
+            var menu = await _menuService.GetMenuByIdAsync(venueId);
 
             if (menu is null)
-                return NotFound(id);
+                return NotFound(venueId);
 
             return Ok(menu);
         }

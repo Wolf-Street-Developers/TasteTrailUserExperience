@@ -1,7 +1,5 @@
 using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging.Abstractions;
 using TasteTrailData.Api.Common.Extensions.Controllers;
 using TasteTrailData.Infrastructure.Filters.Dtos;
 using TasteTrailUserExperience.Core.MenuItems.Services;
@@ -20,8 +18,8 @@ public class MenuItemController : ControllerBase
         _menuItemService = menuItemService;
     }
 
-    [HttpPost("{menuId}")]
-    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersSearchDto filterParameters, int menuId)
+    [HttpPost]
+    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersSearchDto filterParameters, [FromQuery] int menuId)
     {
         try 
         {
@@ -51,7 +49,7 @@ public class MenuItemController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> GetFilteredAsync(FilterParametersSearchDto filterParameters)
+    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersSearchDto filterParameters)
     {
         try 
         {
@@ -81,14 +79,14 @@ public class MenuItemController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetByIdAsync(int id)
+    public async Task<IActionResult> GetByIdAsync([FromQuery] int menuItemId)
     {
         try
         {
-             var menuItem = await _menuItemService.GetMenuItemByIdAsync(id);
+             var menuItem = await _menuItemService.GetMenuItemByIdAsync(menuItemId);
 
             if (menuItem is null)
-                return NotFound(id);
+                return NotFound(menuItemId);
 
             return Ok(menuItem);
         }

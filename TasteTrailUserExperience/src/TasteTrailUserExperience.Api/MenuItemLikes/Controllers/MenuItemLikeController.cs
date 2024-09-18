@@ -22,7 +22,7 @@ public class MenuItemLikeController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> CreateAsync([FromForm] MenuItemLikeCreateDto menuItemLike)
+    public async Task<IActionResult> CreateAsync([FromBody] MenuItemLikeCreateDto menuItemLike)
     {
         try
         {
@@ -49,9 +49,9 @@ public class MenuItemLikeController : ControllerBase
         }
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete]
     [Authorize]
-    public async Task<IActionResult> DeleteByMenuItemIdAsync(int id)
+    public async Task<IActionResult> DeleteByMenuItemIdAsync([FromQuery] int menuItemId)
     {
         try
         {
@@ -60,7 +60,7 @@ public class MenuItemLikeController : ControllerBase
                 Username = User.FindFirst(ClaimTypes.Name)!.Value
             };
 
-            var menuItemLikeId = await _menuItemLikeService.DeleteMenuItemLikeByIdAsync(id, user);
+            var menuItemLikeId = await _menuItemLikeService.DeleteMenuItemLikeByIdAsync(menuItemId, user);
 
             if (menuItemLikeId is null)
                 return NotFound(menuItemLikeId);
