@@ -18,8 +18,8 @@ public class MenuItemController : ControllerBase
         _menuItemService = menuItemService;
     }
 
-    [HttpPost("{menuId}")]
-    public async Task<IActionResult> GetFilteredAsync([FromBody] FilterParametersSearchDto filterParameters, int menuId)
+    [HttpPost]
+    public async Task<IActionResult> GetFilteredByMenuAsync([FromBody] FilterParametersSearchDto filterParameters, [FromQuery] int menuId)
     {
         try 
         {
@@ -78,8 +78,8 @@ public class MenuItemController : ControllerBase
         }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetByIdAsync([FromQuery] int menuItemId)
+    [HttpGet("{menuItemId}")]
+    public async Task<IActionResult> GetByIdAsync(int menuItemId)
     {
         try
         {

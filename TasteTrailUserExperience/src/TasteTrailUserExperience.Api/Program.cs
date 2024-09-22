@@ -13,7 +13,17 @@ SetupEnvironmentVariables.SetupEnvironmentVariablesMethod(builder.Configuration,
 builder.Services.InitDbContext(builder.Configuration);
 builder.Services.InitAuth(builder.Configuration);
 builder.Services.InitSwagger();
-builder.Services.InitCors();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 
 builder.Services.RegisterDependencyInjection();
 
@@ -31,6 +41,9 @@ builder.Services.AddHostedService<MenuItemRabbitMqService>();
 builder.Services.AddHostedService<UserRabbitMqService>();
 
 var app = builder.Build();
+
+app.UseCors("AllowAll");
+
 
 using (var scope = app.Services.CreateScope())
 {

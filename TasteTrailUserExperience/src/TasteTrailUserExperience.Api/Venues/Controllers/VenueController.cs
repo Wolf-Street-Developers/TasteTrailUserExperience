@@ -31,8 +31,8 @@ public class VenueController : Controller
         }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetByIdAsync([FromQuery] int venueId)
+    [HttpGet("{venueId}")]
+    public async Task<IActionResult> GetByIdAsync(int venueId)
     {
         try
         {

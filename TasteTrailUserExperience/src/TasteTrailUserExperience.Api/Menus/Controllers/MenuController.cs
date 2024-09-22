@@ -16,8 +16,8 @@ public class MenuController : ControllerBase
         _menuService = menuService;
     }
 
-    [HttpPost("{venueId}")]
-    public async Task<IActionResult> GetFilteredAsync([FromBody] PaginationParametersDto paginationParameters, int venueId)
+    [HttpPost]
+    public async Task<IActionResult> GetFilteredByVenueAsync([FromBody] PaginationParametersDto paginationParameters, [FromQuery] int venueId)
     {
         try 
         {
@@ -46,8 +46,8 @@ public class MenuController : ControllerBase
         }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetByIdAsync([FromQuery] int venueId)
+    [HttpGet("{venueId}")]
+    public async Task<IActionResult> GetByIdAsync(int venueId)
     {
         try
         {
