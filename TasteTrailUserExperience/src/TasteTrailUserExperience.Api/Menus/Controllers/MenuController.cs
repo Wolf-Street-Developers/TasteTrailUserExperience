@@ -47,14 +47,14 @@ public class MenuController : ControllerBase
     }
 
     [HttpGet("{venueId}")]
-    public async Task<IActionResult> GetByIdAsync(int venueId)
+    public async Task<IActionResult> GetByIdAsync(int menuId)
     {
         try
         {
-            var menu = await _menuService.GetMenuByIdAsync(venueId);
+            var menu = await _menuService.GetMenuByIdAsync(menuId);
 
             if (menu is null)
-                return NotFound(venueId);
+                return NotFound(menuId);
 
             return Ok(menu);
         }
