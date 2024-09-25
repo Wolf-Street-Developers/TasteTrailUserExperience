@@ -42,6 +42,7 @@ builder.Services.AddHostedService<UserRabbitMqService>();
 
 var app = builder.Build();
 
+// Update CORS
 app.UseCors("AllowAll");
 
 
