@@ -111,7 +111,6 @@ public class MenuEfCoreRepository : IMenuRepository
 
         menuToUpdate.Name = menu.Name;
         menuToUpdate.Description = menu.Description;
-        menuToUpdate.ImageUrlPath = menu.ImageUrlPath;
 
         await _dbContext.SaveChangesAsync();
 

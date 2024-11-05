@@ -130,11 +130,9 @@ public class MenuItemEfCoreRepository : IMenuItemRepository
         if (menuItemToUpdate is null)
             return null;
 
-        
         menuItemToUpdate.Name = menuItem.Name;
         menuItemToUpdate.Description = menuItem.Description;
         menuItemToUpdate.Price = menuItem.Price;
-        menuItemToUpdate.ImageUrlPath = menuItem.ImageUrlPath;
 
         await _dbContext.SaveChangesAsync();
 
