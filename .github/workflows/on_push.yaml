@@ -54,7 +54,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            cd /home/azureuser/TasteTrailAdminDashboard
+            cd /home/azureuser/TasteTrailUserExperience
             echo "${{ secrets.SSH_PASSWORD }}" | sudo -S docker compose pull
             echo "${{ secrets.SSH_PASSWORD }}" | sudo -S docker compose down
             echo "${{ secrets.SSH_PASSWORD }}" | sudo -S docker compose up -d
