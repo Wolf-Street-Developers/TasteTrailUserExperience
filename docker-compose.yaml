@@ -32,7 +32,7 @@ services:
     depends_on:
       - user-postgres
     ports:
-      - "9000:80"
+      - "9001:80"
     networks:
       - user_exp
     restart: always
