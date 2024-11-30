@@ -56,11 +56,10 @@ using (var scope = app.Services.CreateScope())
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseCors("AllowAllOrigins");
 
 app.MapControllers();
 
 app.UseAuthentication();
-// app.UseAuthorization();
+app.UseAuthorization();
 
 app.Run();
